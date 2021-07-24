@@ -5,8 +5,8 @@
  */
 package com.springbootcourse.course.resouces;
 
-import com.springbootcourse.course.entities.Category;
-import com.springbootcourse.course.servicies.CategoryService;
+import com.springbootcourse.course.entities.Product;
+import com.springbootcourse.course.servicies.ProductService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,24 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author evandio.pereira
+ * @author evand
  */
 @RestController
-@RequestMapping(value = "/categories")
-public class CategoryResource {
+@RequestMapping(value = "/products")
+public class ProductResource {
 
     @Autowired
-    private CategoryService service;
+    private ProductService service;
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAl() {
-        List<Category> list = service.findAll();
+    public ResponseEntity<List<Product>> findAll() {
+        List<Product> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Category> findById(@PathVariable Long id) {
-        Category obj = service.findById(id);
+    public ResponseEntity<Product> findById(@PathVariable Long id) {
+        Product obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
