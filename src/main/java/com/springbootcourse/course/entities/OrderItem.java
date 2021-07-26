@@ -5,9 +5,12 @@
  */
 package com.springbootcourse.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springbootcourse.course.entities.pk.OrderItemPK;
+
 import java.io.Serializable;
 import java.util.Objects;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -23,11 +26,16 @@ public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
+
     private Integer quantity;
     private Double price;
 
+    public OrderItem() {
+    }
+
     public OrderItem(Order order, Product product, Integer quantity, Double price) {
+        super();
         id.setOrder(order);
         id.setProduct(product);
         this.quantity = quantity;
@@ -68,8 +76,8 @@ public class OrderItem implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 31 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
