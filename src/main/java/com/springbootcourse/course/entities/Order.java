@@ -35,8 +35,8 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private Instant moment;
+   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+   private Instant moment;
 
     private Integer orderStatus;
 
@@ -51,6 +51,7 @@ public class Order implements Serializable {
     }
 
     public Order(Long Id, Instant moment, OrderStatus orderStatus, User client) {
+        super();
         this.Id = Id;
         this.moment = moment;
         setOrderStatus(orderStatus);
@@ -107,10 +108,4 @@ public class Order implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Order{" + "Id=" + Id + ", moment=" + moment + ", orderStatus=" + orderStatus + ", client=" + client + '}';
-    }
-
 }
