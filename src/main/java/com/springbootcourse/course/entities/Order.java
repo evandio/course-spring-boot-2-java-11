@@ -46,12 +46,12 @@ public class Order implements Serializable {
     @JoinColumn(name = "cliente_id")
     private User client;
 
-    @OneToMany(mappedBy = "id.order") 
+    @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
-    
+
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
-    
+
     public Order() {
     }
 
@@ -92,13 +92,19 @@ public class Order implements Serializable {
         this.payment = payment;
     }
 
-    
     public Set<OrderItem> getItems() {
         return items;
     }
-    
-    
-    
+
+    public Double getTotal() {
+        Double sum = 0.0;
+        for (OrderItem x : items) {
+            sum += x.getSubTotal();
+        }
+
+        return sum;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -124,5 +130,4 @@ public class Order implements Serializable {
         return true;
     }
 
-   
 }
