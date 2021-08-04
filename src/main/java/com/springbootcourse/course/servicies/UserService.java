@@ -7,6 +7,7 @@ package com.springbootcourse.course.servicies;
 
 import com.springbootcourse.course.entities.User;
 import com.springbootcourse.course.repositories.UserRepository;
+import com.springbootcourse.course.servicies.exceptions.ResourceNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public List<User> findAll() {
